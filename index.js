@@ -13,11 +13,10 @@ console.log(process.env.DB_PASS)
 app.use(cors())
 app.use(express.json());
 
-//tastytimes 
-//tastytimes123456
+
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send('TheTastyTimes server!')
 })
 
 ////////////////mongoDB///////////////
@@ -41,12 +40,53 @@ async function run() {
     await client.connect();
     // Send a ping to confirm a successful connection
 
+    const TastyCollection = client.db('tastyMenuDB').collection('tastyMenuData')
 
     //crud///
 
+    ////menuDataZ/////
+
+    app.get('/menuData',  async(req, res) => {
+
+      const cursor = TastyCollection.find() 
+      const result = await cursor.toArray() 
+      res.send(result)
+
+    })
+    ////menuDataZ/////
+
+    const shopCollection = client.db('tastyDB').collection('tastyData')
+
+    app.get('/shopData',  async(req, res) => {
+
+      const cursor = shopCollection.find() 
+      const result = await cursor.toArray() 
+      res.send(result)
+
+    })
+
+    ///shopData//
+
+      
+
+    /////add///
+
+    app.post('/shopData',  async(req, res) => {
+      
+         
 
 
+    })
 
+
+    /////add///
+    
+
+      
+
+    ///shopData//
+
+ 
 
 
 
