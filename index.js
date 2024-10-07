@@ -87,12 +87,9 @@ async function run() {
 
 
     app.get('/addData',  async(req, res) => {
-         
       const cursor = addCollection.find();
       const result = await cursor.toArray(); 
       res.send(result)
-
-      
     })
 
 
@@ -166,6 +163,22 @@ async function run() {
       
 
     ///shopData//
+
+
+    ////login data////
+
+    const loginCollection = client.db('loginDB').collection('loginData')
+      
+    app.post('/loginData',  async(req, res) => {
+      
+      const loginData = req.body 
+      console.log(loginData)
+      const result = await loginCollection.insertOne(loginData) 
+      res.send(result)
+
+    })
+
+    ////login data////
 
  
 
